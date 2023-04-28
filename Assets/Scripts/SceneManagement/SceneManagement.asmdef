@@ -1,0 +1,16 @@
+{
+    "name": "SceneManagement",
+    "rootNamespace": "ML.SceneManagement",
+    "references": [
+        "GUID:f836097d1342feb448ac5258f2ba026f"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
