@@ -7,9 +7,12 @@ namespace ML.SceneManagement
 {
     public class LoadScenes : MonoBehaviour
     {
+        [SerializeField] string loadSceneNameOnStart;
         [SerializeField] ScenesHolder scenesHolder;
         [SerializeField] UnityEvent onSceneLoaded;
         public ScenesHolder ScenesHolder { get { return scenesHolder; } }
+
+       
 
         private IEnumerator Start()
         {
@@ -19,7 +22,7 @@ namespace ML.SceneManagement
             {
                 bool isLoaded = false;
                 AsyncOperation asyncOperation = SceneManager.LoadSceneAsync(scene, LoadSceneMode.Additive);
-                asyncOperation.completed += (arg) => isLoaded = true;
+                asyncOperation.completed += (arg) => { isLoaded = true; };
                 while (!isLoaded)
                 {
                     yield return null;
