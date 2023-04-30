@@ -6,6 +6,9 @@ namespace ML.GameEvents {
     {
         List<IGameEventListener<TParam>> eventListeners = new List<IGameEventListener<TParam>>();
 
+        /// <summary>
+        /// null check is not required "?."
+        /// </summary>
         public void Invoke(TParam param)
         {
             for (int i = eventListeners.Count - 1; i >= 0; i--)

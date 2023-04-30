@@ -8,7 +8,7 @@ namespace ML.GameEvents
 {
     [System.Serializable]
     public class BaseGameEventListener<TParam, TGameEvent, TAction> :
-        IGameEventListener<TParam> where TGameEvent : BaseGameEvent<TParam>// where TAction : Action<TParam>
+        IGameEventListener<TParam> where TGameEvent : BaseGameEvent<TParam>
     {
         [SerializeField] TGameEvent gameEvent;
         public TGameEvent GameEvent { get { return gameEvent; } set { gameEvent = value; } }
