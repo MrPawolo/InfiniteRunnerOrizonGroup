@@ -8,7 +8,7 @@ namespace ML.InterfaceField
         {
             foreach (SingleInterfaceField<T> field in collection)
             {
-                yield return field.Interface;
+                yield return ((T)(object)field.Interface);
             }
         }
         public static void ValidateInterfaces<T>(ref List<SingleInterfaceField<T>> list)

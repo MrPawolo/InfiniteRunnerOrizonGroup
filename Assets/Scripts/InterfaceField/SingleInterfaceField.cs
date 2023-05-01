@@ -7,29 +7,52 @@ namespace ML.InterfaceField
     [System.Serializable]
     public class SingleInterfaceField<T>
     {
-        public Component component;
-        public T Interface { get; private set; }
+        public Component Interface;
+
         public void Validate()
         {
-            if (!component)
+            if (Interface == null)
                 return;
 
-            if (component is T)
+
+            if (Interface is T)
+                return;
+
+            if(Interface.TryGetComponent<T>(out var inter))
             {
-                Interface = (T)(object)component;
+                Component[] components = Interface.GetComponents<Component>();
+
+                foreach(Component component in components)
+                {
+                    if(component is T)
+                    {
+                        Interface = component;
+                        break;
+                    }
+                }
             }
             else
             {
-                if (component.TryGetComponent<T>(out var inter))
-                {
-                    Interface = inter;
-                }
-                else
-                {
-                    component = null;
-                    Debug.Log("This GameObject Dont have Any Interface Of that type ");
-                }
+                Interface = null;
+                Debug.Log("This GameObject Dont have Any Interface Of that type ");
             }
+
+            //if (component is T)
+            //{
+            //    Interface = (T)(object)component;
+            //}
+            //else
+            //{
+            //    if (component.TryGetComponent<T>(out var inter))
+            //    {
+            //        Interface = inter;
+            //    }
+            //    else
+            //    {
+            //        component = null;
+            //        Debug.Log("This GameObject Dont have Any Interface Of that type ");
+            //    }
+            //}
         }
     } 
 }
