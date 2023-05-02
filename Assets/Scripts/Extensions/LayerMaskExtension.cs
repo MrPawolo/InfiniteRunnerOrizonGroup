@@ -8,7 +8,7 @@ namespace ML.Extensions
     public static class LayerMaskExtension
     {
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool IsWithLayerMask(this LayerMask layerMask,int layer)
+        public static bool ContainsLayer(this LayerMask layerMask,int layer)
         {
             return ((1 << layer) & layerMask) != 0;
         }

@@ -54,7 +54,6 @@ namespace ML.RootShift
                     0,
                     rootReference.position.z);
                 ShiftAmount -= projectedRootDifference;
-                print(ShiftAmount);
                 rootTransform.position = ShiftAmount;
             }
         }
