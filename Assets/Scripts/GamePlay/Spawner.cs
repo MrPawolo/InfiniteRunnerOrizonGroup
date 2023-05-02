@@ -7,7 +7,7 @@ using ML.GameEvents;
 
 namespace ML.GamePlay
 {
-    public class ObstacleSpawner : MonoBehaviour
+    public class Spawner : MonoBehaviour
     {
         [SerializeField] VoidListener onGameStart;
         [SerializeField] VoidListener onGameOver;
@@ -25,12 +25,12 @@ namespace ML.GamePlay
         private void Awake()
         {
             obstaclePool = new ObjectPool<GameObject>(
-                HandleCreateObstacle,
-                HandleGetObstacle,
-                HandleReleaseObstace,
-                HandleDestroyObstacle,
-                false,
-                0, 
+                HandleCreate,
+                HandleGet,
+                HandleRelease,
+                HandleDestroy,
+                true,
+                2, 
                 100);
 
             onGameStart.onGameEventInvoke += HandleGameStart;
@@ -44,32 +44,39 @@ namespace ML.GamePlay
 
         
 
-        private void HandleDestroyObstacle(GameObject obstacle)
+        private void HandleDestroy(GameObject obstacle)
         {
+            //Debug.Log("DESTROY", obstacle);
+            //Debug.Break();
             Destroy(obstacle);
         }
 
-        private void HandleReleaseObstace(GameObject obstacle)
+        private void HandleRelease(GameObject obstacle)
         {
             obstacle.SetActive(false);
+            spawnedObstacles.Remove(obstacle);
         }
 
-        private void HandleGetObstacle(GameObject obstacle)
+        private void HandleGet(GameObject obstacle)
         {
             Transform spawnPoint = GetSpawnPont();
             obstacle.transform.position = spawnPoint.position;
             obstacle.SetActive(true);
+            if (obstacle.TryGetComponent(out IPoolable poolable))
+            {
+                poolable.onGet?.Invoke();
+            }
+            spawnedObstacles.Add(obstacle);
         }
 
-        private GameObject HandleCreateObstacle()
+        private GameObject HandleCreate()
         {
             GameObject obstacleToSpawn = GetObstacle();
             GameObject spawnedObstacle = Instantiate(obstacleToSpawn, RootShiftManager.Root);
             if (spawnedObstacle.TryGetComponent<IPoolable>(out IPoolable poolable))
             {
-                poolable.onRelease += (obj) => obstaclePool.Release(obj);
+                poolable.forceRelease += (obj) => obstaclePool.Release(obj);
             }
-            spawnedObstacles.Add(spawnedObstacle);
             return spawnedObstacle;
         }
 
@@ -86,9 +93,6 @@ namespace ML.GamePlay
             if (CanSpawnNext())
             {
                 obstaclePool.Get();
-                //Transform spawnPoint = GetSpawnPont();
-                //GameObject obstacle = GetObstacle();
-                //Instantiate(obstacle, spawnPoint.transform.position, spawnPoint.transform.rotation, RootShiftManager.Root);
             }
         }
 
@@ -142,10 +146,11 @@ namespace ML.GamePlay
         }
         private void HandlePlayAgain(Void obj)
         {
-            foreach(GameObject obstacle in spawnedObstacles)
+            for (int i = spawnedObstacles.Count - 1; i >= 0; i--)
             {
-                obstaclePool.Release(obstacle);
-            }    
+
+                obstaclePool.Release(spawnedObstacles[i]);
+            }
         }
     }
 

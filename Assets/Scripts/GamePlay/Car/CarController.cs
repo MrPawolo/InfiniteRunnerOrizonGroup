@@ -18,7 +18,6 @@ namespace ML.GamePlay
         [SerializeField] CarNormalizedScreenPos carPos;
         [SerializeField] CarRotate carRotate;
         [SerializeField] CarVelocity carVelocity;
-        [SerializeField] LayerMask obstacleMask; 
 
         [SerializeField] float smoothTime = 0.1f;
         float currentMouseVelocity;
@@ -96,40 +95,24 @@ namespace ML.GamePlay
                  ref currentMouseVelocity,
                  smoothTime);
             carPos.SetNormalizedScreenXPos(newPosition);
-
-            carRotate.RotateCar(currentMouseVelocity);
-
+            carRotate.RotateCar();
             carVelocity.VelocitiesOnCar();
-
             rb.angularVelocity = Vector3.zero;
         }
 
 
-        void Collision()
-        {
-            collided = true;
-            rb.useGravity = true;
-            carVelocity.Vel = 0;
-        }
-
-        private void OnCollisionEnter(Collision collision)
+        public void Collision()
         {
             if (collided)
                 return;
-
-            if (!obstacleMask.IsWithLayerMask(collision.gameObject.layer))
-                return;
-
-            print(collision);
-            Collision();
+            collided = true;
+            rb.useGravity = true;
+            carVelocity.Vel = 0;
             onCarDied.Invoke();
         }
 
         
-    }
 
-    public interface IPositionChanged
-    {
-        public Action OnPositionChanged { get; set; }
+        
     }
 }

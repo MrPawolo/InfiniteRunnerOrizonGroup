@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using System;
 using UnityEngine;
 using UnityEngine.Pool;
 using ML.RootShift;
@@ -8,10 +7,6 @@ using ML.GameEvents;
 
 namespace ML.GamePlay
 {
-    public interface IPoolable
-    {
-        public Action<GameObject> onRelease { get;set; }
-    }
     public class RoadGenerator : MonoBehaviour
     {
         [SerializeField] VoidListener onPlayAgain;

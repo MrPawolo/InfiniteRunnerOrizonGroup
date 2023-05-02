@@ -8,9 +8,18 @@ namespace ML.GamePlay
         [SerializeField] AnimationCurve velocityToRotation;
         [SerializeField] AnimationCurve velocityToRoll;
 
+        float previousXPos;
 
-        public void RotateCar(float currentVelocity)
+        private void Awake()
         {
+            previousXPos = transform.position.x;
+        }
+
+        public void RotateCar()
+        {
+            float currentVelocity = transform.position.x - previousXPos;
+            previousXPos = transform.position.x;
+
             Quaternion rot = Quaternion.Euler(
                 0,
                 velocityToRotation.Evaluate(Mathf.Abs(currentVelocity)) * Mathf.Sign(currentVelocity),

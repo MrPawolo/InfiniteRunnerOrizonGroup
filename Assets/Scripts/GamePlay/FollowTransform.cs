@@ -23,12 +23,12 @@ namespace ML.GamePlay
         private void Awake()
         {
             initialOffset = transform.position - transformToFollow.position;
-            carTransformWasChanged.Interface.OnPositionChanged += HandlePositionWasChanged;
+            ((IPositionChanged)carTransformWasChanged.Interface).OnPositionChanged += HandlePositionWasChanged;
         }
 
         private void OnDestroy()
         {
-            carTransformWasChanged.Interface.OnPositionChanged -= HandlePositionWasChanged;
+            ((IPositionChanged)carTransformWasChanged.Interface).OnPositionChanged -= HandlePositionWasChanged;
         }
 
         private void HandlePositionWasChanged()

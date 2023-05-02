@@ -4,9 +4,11 @@ using UnityEngine;
 
 namespace ML.GamePlay
 {
-    public class PoolableWorldPart : MonoBehaviour, IPoolable
+    public class PollableObstacle : MonoBehaviour, IPoolable
     {
-        public Action<GameObject> onRelease { get; set; }
+        public Action<GameObject> forceRelease { get; set; }
+        public Action onGet { get; set; }
+
         readonly static float DESPAWN_DISTANCE = 50;
 
         Transform cameraTransform;
@@ -19,7 +21,9 @@ namespace ML.GamePlay
         void Update()
         {
             if (CanDespawn())
-                onRelease?.Invoke(gameObject);
+            {
+                forceRelease?.Invoke(gameObject);
+            }
         }
 
         private bool CanDespawn()

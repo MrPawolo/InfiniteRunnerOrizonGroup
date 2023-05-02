@@ -7,6 +7,8 @@ namespace ML.GamePlay
     {
         [SerializeField] float accel;
         [SerializeField] Rigidbody rb;
+        [SerializeField] float holdSpring = 2;
+        [SerializeField] float holdDamper = 0.1f;
         public float Vel { get; set; }
 
         private float currentCalVel;
@@ -43,7 +45,7 @@ namespace ML.GamePlay
         {
             float distance = targetHeight - rb.position.y;
             float velY = rb.velocity.y;
-            float newVelY = distance * 1 - velY * 0.1f;
+            float newVelY = distance * holdSpring - velY * holdDamper;
             rbPosition.y = newVelY;
             return rbPosition;
         }
