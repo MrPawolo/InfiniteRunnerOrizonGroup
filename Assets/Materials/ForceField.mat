@@ -7,13 +7,13 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Tyre
-  m_Shader: {fileID: -6465566751694194690, guid: 4488273777b59494ea2906eaaca19bfb,
+  m_Name: ForceField
+  m_Shader: {fileID: -6465566751694194690, guid: b589ef381b351a046af3c5e19b1e70d8,
     type: 3}
   m_ValidKeywords: []
   m_InvalidKeywords: []
   m_LightmapFlags: 4
-  m_EnableInstancingVariants: 1
+  m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
   m_CustomRenderQueue: -1
   stringTagMap: {}
@@ -80,8 +80,6 @@ Material:
     m_Ints: []
     m_Floats:
     - _AlphaClip: 0
-    - _BendMultiplier: 0.1
-    - _BendPower: 3
     - _Blend: 0
     - _BumpScale: 1
     - _ClearCoatMask: 0
@@ -92,35 +90,34 @@ Material:
     - _DetailNormalMapScale: 1
     - _DstBlend: 0
     - _EnvironmentReflections: 1
+    - _FresnelPower: 4.77
     - _GlossMapScale: 0
     - _Glossiness: 0
-    - _GlossinessSource: 0
     - _GlossyReflections: 0
+    - _IntersectDisapear: 10
+    - _IntersectPower: 4
     - _Metallic: 0
     - _OcclusionStrength: 1
     - _Parallax: 0.005
     - _QueueControl: 0
     - _QueueOffset: 0
     - _ReceiveShadows: 1
-    - _Shininess: 0
-    - _SideBendMultiplier: 0
-    - _SideBendPower: 0
-    - _Smoothness: 0
-    - _SmoothnessSource: 0
+    - _Smoothness: 0.5
     - _SmoothnessTextureChannel: 0
-    - _SpecSource: 0
     - _SpecularHighlights: 1
     - _SrcBlend: 1
     - _Surface: 0
     - _WorkflowMode: 1
     - _ZWrite: 1
+    - _baseAlpha: 0.064
+    - _speed: 0.1
     m_Colors:
-    - _BaseColor: {r: 0.098000005, g: 0.098000005, b: 0.098000005, a: 1}
-    - _Color: {r: 0.09799997, g: 0.09799997, b: 0.09799997, a: 1}
+    - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
+    - _Color: {r: 4.2810473, g: 14.270159, b: 51.984146, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
   m_BuildTextureStacks: []
---- !u!114 &728531388613179334
+--- !u!114 &8586434571864646416
 MonoBehaviour:
   m_ObjectHideFlags: 11
   m_CorrespondingSourceObject: {fileID: 0}
