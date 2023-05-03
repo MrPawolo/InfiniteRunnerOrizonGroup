@@ -21,5 +21,5 @@ Link to download the build:
 
 
 
-Link to a document: 
+Link to a document about the game: 
 https://docs.google.com/document/d/15a2qMkO5PhbXvLLktwvZsgT4Tf-rXnWnqXzqmbNYzNo/edit?usp=sharing
