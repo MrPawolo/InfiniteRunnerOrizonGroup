@@ -26,12 +26,14 @@ namespace ML.GamePlay
 
         public void SetNormalizedScreenXPos(float position)
         {
-            Vector3 newWorldPos = cam.ScreenToWorldPoint(new Vector3(position * Screen.width, 0,depth) );
+            Vector3 newWorldPos = cam.ScreenToWorldPoint(new Vector3(position * Screen.width, 0,depth));
             Vector3 worldPos = trackTransform.position;
             worldPos.x = newWorldPos.x;
-            worldPos.x = Mathf.Clamp(worldPos.x, -roadWidth / 2 + carWidth / 2, roadWidth / 2 - carWidth / 2);
+            worldPos.x = Mathf.Clamp(
+                worldPos.x,
+                -roadWidth / 2 + carWidth / 2,
+                roadWidth / 2 - carWidth / 2);
             trackTransform.position = worldPos;
-
         }
     }
 }

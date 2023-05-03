@@ -18,22 +18,17 @@ namespace ML.GamePlay
         [SerializeField] CarNormalizedScreenPos carPos;
         [SerializeField] CarRotate carRotate;
         [SerializeField] CarVelocity carVelocity;
-
         [SerializeField] float smoothTime = 0.1f;
-        float currentMouseVelocity;
-
         [SerializeField] Rigidbody rb;
-
         [SerializeField] float vel = 20;
+        [SerializeField] float targetHeight;
 
         bool collided = false;
-
-        public float targetHeight;
-
+        float currentMouseVelocity;
         Action onPositionChanged;
         Vector3 startPosition;
         Quaternion startRotation;
-
+        
         public Action OnPositionChanged { get => onPositionChanged; set => onPositionChanged = value; }
 
         private void Awake()
@@ -81,9 +76,12 @@ namespace ML.GamePlay
             currentMouseVelocity = 0;
         }
 
-        private void Start()
+        void Update()
         {
+            if (collided)
+                return;
         }
+
         private void FixedUpdate()
         {
             if (collided)
@@ -93,20 +91,22 @@ namespace ML.GamePlay
                  carPos.GetNormalizedScreenXPos(),
                  mousePositon.GetNormalizedScreenXPos(),
                  ref currentMouseVelocity,
-                 smoothTime);
+                 smoothTime,
+                 2,
+                 Time.fixedDeltaTime);
+
             carPos.SetNormalizedScreenXPos(newPosition);
             carRotate.RotateCar();
             carVelocity.VelocitiesOnCar();
             rb.angularVelocity = Vector3.zero;
         }
 
-
         public void Collision(Collision collision)
         {
             if (collided)
                 return;
 
-            if(collision.rigidbody.TryGetComponent(out IDestroy destroy))
+            if (collision.rigidbody.TryGetComponent(out IDestroy destroy))
             {
                 destroy.Destroy();
             }
@@ -116,9 +116,5 @@ namespace ML.GamePlay
             carVelocity.Vel = 0;
             onCarDied.Invoke();
         }
-
-        
-
-        
     }
 }
