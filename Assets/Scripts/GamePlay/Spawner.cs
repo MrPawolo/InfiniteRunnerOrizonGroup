@@ -14,7 +14,7 @@ namespace ML.GamePlay
         [SerializeField] VoidListener onPlayAgain;
         [SerializeField] float spawnDistance = 15;
         [SerializeField] Transform[] spawnPoints = new Transform[0];
-        [SerializeField] GameObject[] obstacels = new GameObject[0];
+        [SerializeField] GameObject[] prefabs = new GameObject[0];
     
         ObjectPool<GameObject> obstaclePool;
         List<GameObject> spawnedObstacles = new List<GameObject>();
@@ -106,8 +106,8 @@ namespace ML.GamePlay
 
         GameObject GetObstacle()
         {
-            int obstacleIndex = Random.Range(0, obstacels.Length);
-            GameObject obstacle = obstacels[obstacleIndex];
+            int obstacleIndex = Random.Range(0, prefabs.Length);
+            GameObject obstacle = prefabs[obstacleIndex];
             return obstacle;
         }
 
