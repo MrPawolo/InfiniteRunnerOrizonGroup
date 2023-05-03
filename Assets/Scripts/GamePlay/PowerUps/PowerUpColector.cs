@@ -13,7 +13,7 @@ namespace ML.GamePlay
         [SerializeField] PowerUpContainer powerUpContainer;
         [SerializeField] UnityEvent onCollect;
 
-        public Action<GameObject> forceRelease { get; set; }
+        public Action<GameObject> onRelease { get; set; }
         public Action onGet { get; set; }
 
         readonly static float DESPAWN_DISTANCE = 50;
@@ -42,20 +42,25 @@ namespace ML.GamePlay
                 return;
 
             onCollect.Invoke();
-            forceRelease?.Invoke(gameObject);
+            ForceRelease();
         }
 
         void Update()
         {
             if (CanDespawn())
             {
-                forceRelease?.Invoke(gameObject);
+                ForceRelease();
             }
         }
 
         private bool CanDespawn()
         {
             return (cameraTransform.position.z - transform.position.z) >= DESPAWN_DISTANCE;
+        }
+
+        public void ForceRelease()
+        {
+            onRelease?.Invoke(gameObject);
         }
     }
 }

@@ -1315,6 +1315,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: CarPlayer
       objectReference: {fileID: 0}
+    - target: {fileID: 4598185567847120753, guid: a56cb5de6647f22409ac4089b74d3380,
+        type: 3}
+      propertyPath: onCollision.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7107922813101995898, guid: a56cb5de6647f22409ac4089b74d3380,
         type: 3}
       propertyPath: m_Name

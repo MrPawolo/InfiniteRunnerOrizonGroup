@@ -36,23 +36,6 @@ namespace ML.InterfaceField
                 Interface = null;
                 Debug.Log("This GameObject Dont have Any Interface Of that type ");
             }
-
-            //if (component is T)
-            //{
-            //    Interface = (T)(object)component;
-            //}
-            //else
-            //{
-            //    if (component.TryGetComponent<T>(out var inter))
-            //    {
-            //        Interface = inter;
-            //    }
-            //    else
-            //    {
-            //        component = null;
-            //        Debug.Log("This GameObject Dont have Any Interface Of that type ");
-            //    }
-            //}
         }
     } 
 }

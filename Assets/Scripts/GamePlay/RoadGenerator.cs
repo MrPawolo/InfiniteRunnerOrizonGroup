@@ -91,12 +91,12 @@ namespace ML.GamePlay
 
         private void Update()
         {
-            GameObject worldPart = spawnedParts.Peek();
-            TryMoveToBegining(worldPart);
+            TrySpawnWorldPart();
         }
 
-        void TryMoveToBegining(GameObject gameObject)
+        void TrySpawnWorldPart()
         {
+            GameObject gameObject = spawnedParts.Peek();
             if (Vector3.Distance(gameObject.transform.position, cameraTransfomr.position) > despawnDistance)
             {
                 partPool.Release(spawnedParts.Dequeue());

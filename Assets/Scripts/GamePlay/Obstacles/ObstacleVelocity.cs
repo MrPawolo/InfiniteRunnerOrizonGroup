@@ -26,13 +26,13 @@ namespace ML.GamePlay
         private void Awake()
         {
             ((IPoolable)pollableObstacle.Interface).onGet += HandleOnGet;
-            ((IPoolable)pollableObstacle.Interface).forceRelease += HandleOnRelease;
+            ((IPoolable)pollableObstacle.Interface).onRelease += HandleOnRelease;
         }
 
         private void OnDestroy()
         {
             ((IPoolable)pollableObstacle.Interface).onGet -= HandleOnGet;
-            ((IPoolable)pollableObstacle.Interface).forceRelease -= HandleOnRelease;
+            ((IPoolable)pollableObstacle.Interface).onRelease -= HandleOnRelease;
         }
 
         private void HandleOnRelease(GameObject obj)

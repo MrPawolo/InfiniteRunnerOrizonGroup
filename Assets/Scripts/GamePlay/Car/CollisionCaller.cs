@@ -8,7 +8,7 @@ namespace ML.GamePlay
 {
     public class CollisionCaller : OnCollisionEnterHandler
     {
-        [SerializeField] UnityEvent onCollision;
+        [SerializeField] UnityEvent<Collision> onCollision;
         [SerializeField] LayerMask obstacleMask;
 
         public override void OnCollision(Collision collision)
@@ -16,7 +16,7 @@ namespace ML.GamePlay
             if (!obstacleMask.ContainsLayer(collision.gameObject.layer))
                 return;
 
-            onCollision.Invoke();
+            onCollision.Invoke(collision);
         }
 
        

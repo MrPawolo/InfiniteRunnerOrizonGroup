@@ -75,7 +75,7 @@ namespace ML.GamePlay
             GameObject spawnedObstacle = Instantiate(obstacleToSpawn, RootShiftManager.Root);
             if (spawnedObstacle.TryGetComponent<IPoolable>(out IPoolable poolable))
             {
-                poolable.forceRelease += (obj) => obstaclePool.Release(obj);
+                poolable.onRelease += (obj) => obstaclePool.Release(obj);
             }
             return spawnedObstacle;
         }
@@ -154,64 +154,4 @@ namespace ML.GamePlay
         }
     }
 
-    class WeightedRandom
-    {
-        public float[] Weights;
-
-        WeightedRandom(int weights)
-        {
-            Weights = new float[weights];
-            for (int i = 0; i < weights; i++)
-            {
-                Weights[i] = 1;
-            }
-        }
-
-        public void Normalize()
-        {
-            float sum = Sum();
-            for (int i = 0; i < Weights.Length; i++)
-            {
-                Weights[i] /= sum;
-            }
-        }
-
-        float Sum()
-        {
-            float sum = 0;
-            foreach (float w in Weights)
-                sum += w;
-
-            return sum;
-        }
-        public int Random()
-        {
-            float sum = Sum();
-            float random = UnityEngine.Random.Range(0, sum);
-            int index = 0;
-            float currentSum = 0;
-            foreach(float w in Weights)
-            {
-                currentSum += w;
-                if (currentSum >= random)
-                    return index;
-
-                index++;
-            }
-            return 0;
-        }
-
-        public void ModifyWeight(int index, float modifyVal)
-        {
-            if (!(index >= 0 && index < Weights.Length))
-                return;
-
-            float min = 0.01f;
-            float weight = Weights[index];
-            weight = Mathf.Max(min, weight + modifyVal);
-            Weights[index] = weight;
-
-            Normalize();
-        }
-    }
 }

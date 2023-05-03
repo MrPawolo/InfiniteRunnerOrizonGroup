@@ -101,10 +101,16 @@ namespace ML.GamePlay
         }
 
 
-        public void Collision()
+        public void Collision(Collision collision)
         {
             if (collided)
                 return;
+
+            if(collision.rigidbody.TryGetComponent(out IDestroy destroy))
+            {
+                destroy.Destroy();
+            }
+
             collided = true;
             rb.useGravity = true;
             carVelocity.Vel = 0;

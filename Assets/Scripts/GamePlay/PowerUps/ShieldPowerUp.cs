@@ -24,12 +24,6 @@ namespace ML.GamePlay
             }
         }
 
-        private void Start()
-        {
-            
-        }
-
-
 
         public override void OnCollision(Collision collision)
         {
@@ -43,11 +37,9 @@ namespace ML.GamePlay
 
             onDestroy?.Invoke();
 
-            if (obstacle.TryGetComponent(out IPoolable poolable))
+            if (obstacle.TryGetComponent(out IDestroy destroy))
             {
-                if(obstacle.activeSelf)
-                    poolable.forceRelease?.Invoke(obstacle);
-                //Debug.DrawRay(obstacle.transform.position, Vector3.up, Color.cyan, 10);
+                destroy.Destroy();
             }
             Destroy(gameObject);
         }
